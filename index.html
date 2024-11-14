@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiranmayee Abbireddy - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            text-shadow: 0 0 10px #bb850f, 0 0 20px #bb850f, 0 0 30px #bb850f, 0 0 40px #bb850f;
+        }
+        section {
+            padding: 60px 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    
+
+        .btn {
+            padding: 10px 10px;
+            font-size: 20px;
+            color: #fff;
+            background-color: transparent;
+            border: 2px solid #11010179; /* Adds a visible border */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+            text-decoration: none;
+
+        }
+    
+        /* Create the rainbow shadow effect */
+        .btn:hover {
+            animation: rainbow-shadow 4s linear infinite;
+        }
+    
+        /* Keyframes for moving rainbow shadow effect */
+        @keyframes rainbow-shadow {
+            0% {
+                box-shadow: 
+                    0 0 10px 5px rgba(179, 0, 255, 0.5), /* Green shadow on top */
+                    10px 0 10px 5px rgba(0, 0, 255, 0.5), /* Blue shadow on right */
+                    0 10px 10px 5px rgba(255, 255, 0, 0.5), /* Yellow shadow on bottom */
+                    -10px 0 10px 5px rgba(255, 165, 0, 0.5); /* Orange shadow on left */
+            }
+            25% {
+                box-shadow: 
+                    0 0 10px 5px rgba(255, 255, 0, 0.5), /* Yellow shadow on top */
+                    10px 0 10px 5px rgba(255, 165, 0, 0.5), /* Orange shadow on right */
+                    0 10px 10px 5px rgba(0, 255, 0, 0.5), /* Green shadow on bottom */
+                    -10px 0 10px 5px rgba(0, 0, 255, 0.5); /* Blue shadow on left */
+            }
+            50% {
+                box-shadow: 
+                    0 0 10px 5px rgba(0, 0, 255, 0.5), /* Blue shadow on top */
+                    10px 0 10px 5px rgba(255, 255, 0, 0.5), /* Yellow shadow on right */
+                    0 10px 10px 5px rgba(255, 165, 0, 0.5), /* Orange shadow on bottom */
+                    -10px 0 10px 5px rgba(6, 138, 185, 0.5); /* Green shadow on left */
+            }
+            75% {
+                box-shadow: 
+                    0 0 10px 5px rgba(255, 165, 0, 0.5), /* Orange shadow on top */
+                    10px 0 10px 5px rgba(0, 255, 0, 0.5), /* Green shadow on right */
+                    0 10px 10px 5px rgba(0, 0, 255, 0.5), /* Blue shadow on bottom */
+                    -10px 0 10px 5px rgba(255, 255, 0, 0.5); /* Yellow shadow on left */
+            }
+            100% {
+                box-shadow: 
+                    0 0 10px 5px rgba(96, 6, 156, 0.5), /* Green shadow on top */
+                    10px 0 10px 5px rgba(175, 17, 67, 0.5), /* Blue shadow on right */
+                    0 10px 10px 5px rgba(255, 255, 0, 0.5), /* Yellow shadow on bottom */
+                    -10px 0 10px 5px rgba(255, 165, 0, 0.5); /* Orange shadow on left */
+            }
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center; /* Center-aligns the buttons horizontally */
+            gap: 40px; /* Adds space between buttons */
+        }
+        .skill, .project, .education-item {
+            background-color: rgba(51, 51, 51, 0.7);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .skill:hover, .project:hover, .education-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 0, 0, 0.3), 0 0 45px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            background-color: rgba(51, 51, 51, 0.7);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 0, 0, 0.3), 0 0 45px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 255, 0, 0.3);
+        }
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #education {
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .container-edu {
+            display: flex; /* Flexbox for horizontal layout */
+            flex-direction:row;
+            justify-content: center; /* Center-align the entire content */
+            gap: 20px; /* Space between the cards */
+            flex-wrap: wrap; /* Allow wrapping if the screen size is small */
+        }
+        
+        .education-item {
+            width: 250px; /* Set a fixed width for each card */
+            padding: 20px;
+            background-color: #f4f4f400; /* Light background color */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+            text-align: left; /* Align text to the left */
+        }
+        
+        /* Make cards alternate sides */
+        .education-item:nth-child(odd) {
+            align-self: flex-start; /* Align odd-numbered cards to the left */
+        }
+        
+        .education-item:nth-child(even) {
+            align-self: flex-start; /* Align even-numbered cards to the right */
+        }
+        
+        /* Styling for the header and paragraphs */
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .education-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .education-item p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .education-item:nth-child(1):hover {
+            box-shadow: 0 0 15px rgba(73, 8, 106, 0.5), 0 0 30px rgba(255, 0, 217, 0.509), 0 0 45px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
+        }
+        
+        .education-item:nth-child(2):hover {
+            box-shadow: 0 0 15px rgba(68, 126, 164, 0.728), 0 0 30px rgba(38, 96, 189, 0.578), 0 0 45px rgba(0, 47, 255, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
+        }
+        
+        .education-item:nth-child(3):hover {
+            box-shadow: 0 0 15px rgba(21, 190, 134, 0.564), 0 0 30px rgba(4, 105, 43, 0.747), 0 0 45px rgba(0, 255, 85, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
+        }
+        /* Grid Layout for Skills */
+        /* Styling for the grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 120px);
+            grid-template-rows: repeat(5, 120px);
+            gap: 10px;
+            position: relative;
+        }
+        
+        .grid-cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .skill {
+            background-color: #000000;
+            color:#ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            z-index:5;
+        }
+
+        .skill:hover{
+            background: linear-gradient(to top right, #5ffaff, #feb47b, #cba011);
+            color:#000000;
+        }
+        
+        .empty-cell {
+            background-color: transparent;
+        }
+        
+        .line-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h1>Kiranmayee Abbireddy</h1>
+                <p>A passionate software developer with a focus on creating innovative solutions. I aim to be associated with a progressive organization that provides an opportunity to apply my knowledge and skills while keeping abreast with the latest trends and technologies.</p>
+                <div class="btn-container">
+                    <a href="#contact" class="btn">Contact Me</a>
+                    <a href="#projects" class="btn">View Projects</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container" style="margin-top:-100px;">
+                <h2>Skills</h2>
+                <div class="grid-container">
+                    <svg class="line-svg"></svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" style="margin-top: -130px;">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project">
+                    <h3>Automatic Vehicle Braking and Parking System</h3>
+                    <p>Developed a cutting-edge system incorporating advanced sensors and control mechanisms for automatic braking in potential collision scenarios and automated parking.</p>
+                </div>
+                <div class="project">
+                    <h3>IoT-based Real-time River Water Quality Monitoring System</h3>
+                    <p>Implemented a river monitoring system with strategically placed sensors, collecting real-time water quality data (pH, dissolved oxygen, pollutants).</p>
+                </div>
+                <div class="project">
+                    <h3>Real-time Person Alertness and Phone Usage Detection</h3>
+                    <p>Utilized computer vision techniques to analyze live video feeds, assessing alertness levels and detecting phone usage through facial expressions and gestures.</p>
+                </div>
+                <div class="project">
+                    <h3>Battery-powered Smart Agrochemical Sprayer</h3>
+                    <p>Integrated advanced technology for precision, efficiency, and sustainability in agricultural spraying.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" style="margin-top: -130px;">
+            <h2>Education</h2>
+            <div class="container-edu" >
+                <div class="education-item">
+                    <h3>BE CSE</h3>
+                    <p>Nehru Institute of Engineering and Technology</p>
+                    <p>2019 - 2023 | Coimbatore, India</p>
+                    <p>8.1 CGPA</p>
+                </div>
+                <div class="education-item">
+                    <h3>Intermediate</h3>
+                    <p>Narayana Junior College</p>
+                    <p>2017 - 2019 | Vijayawada, India</p>
+                    <p>9.3 CGPA</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>10th Standard</h3>
+                    <p>Narayana E Techno School</p>
+                    <p>2016 - 2017 | Nidadavole, India</p>
+                    <p>9.3 CGPA</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container" style="margin-top: -130px;">
+                <h2>Contact Me</h2>
+                <form>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('background-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const simplex = new SimplexNoise();
+
+        // Create blob geometry
+        const geometry = new THREE.SphereGeometry(1, 128, 128);
+        const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true });
+        const blob = new THREE.Mesh(geometry, material);
+        scene.add(blob);
+
+        // Create stars
+        const starGeometry = new THREE.BufferGeometry();
+        const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.02 });
+
+        const starVertices = [];
+        for (let i = 0; i < 10000; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = (Math.random() - 0.5) * 2000;
+            starVertices.push(x, y, z);
+        }
+
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        camera.position.z = 1.5;
+
+        let time = 0;
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            time += 0.005;
+
+            // Animate blob
+            const positions = blob.geometry.attributes.position;
+            for (let i = 0; i < positions.count; i++) {
+                const p = new THREE.Vector3().fromBufferAttribute(positions, i);
+                p.normalize().multiplyScalar(1 + 0.3 * simplex.noise3D(p.x * 1.5 + time, p.y * 1.5 + time, p.z * 1.5));
+                positions.setXYZ(i, p.x, p.y, p.z);
+            }
+            blob.geometry.computeVertexNormals();
+            positions.needsUpdate = true;
+
+            // Rotate blob
+            blob.rotation.y += 0.002;
+            blob.rotation.z += 0.002;
+
+            // Animate stars
+            stars.rotation.y += 0.0002;
+            stars.rotation.z += 0.0002;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Mouse interaction
+        const mouse = new THREE.Vector2();
+        const target = new THREE.Vector2();
+        const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+
+        document.addEventListener('mousemove', (event) => {
+            mouse.x = (event.clientX - windowHalf.x) / windowHalf.x;
+            mouse.y = (event.clientY - windowHalf.y) / windowHalf.y;
+        });
+
+        const updateCamera = () => {
+            target.x = mouse.x * 0.1;
+            target.y = -mouse.y * 0.1;
+            camera.position.x += (target.x - camera.position.x) * 0.05;
+            camera.position.y += (target.y - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+        };
+
+        const tick = () => {
+            updateCamera();
+            renderer.render(scene, camera);
+            requestAnimationFrame(tick);
+        };
+
+        tick();
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const gridContainer = document.querySelector(".grid-container");
+            const svg = document.querySelector(".line-svg");
+            const skills = ["Python", "Java", "C++", "HTML", "SQL", "Data Structures", "Algorithms", "OOP", "Web Development", "Database Management"];
+            const gridSize = 5;
+            const totalCells = gridSize * gridSize;
+            const grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
+            const skillPositions = [];
+        
+            // Helper function to check if a cell has adjacent filled cells
+            function hasAdjacentFilledCells(row, col) {
+                const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+                return directions.some(([dx, dy]) => {
+                    const newRow = row + dx;
+                    const newCol = col + dy;
+                    return newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize && grid[newRow][newCol] !== null;
+                });
+            }
+        
+            // Place each skill in a cell, ensuring no adjacent cells are filled
+            skills.forEach(skill => {
+                let placed = false;
+                while (!placed) {
+                    const row = Math.floor(Math.random() * gridSize);
+                    const col = Math.floor(Math.random() * gridSize);
+                    if (!grid[row][col] && !hasAdjacentFilledCells(row, col)) {
+                        grid[row][col] = skill;
+                        skillPositions.push({ skill, row, col });
+                        placed = true;
+                    }
+                }
+            });
+        
+            // Render the grid with skills and empty cells
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("grid-cell");
+                    if (grid[row][col]) {
+                        cell.classList.add("skill");
+                        cell.innerText = grid[row][col];
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        cell.addEventListener("mouseenter", highlightLines);
+                        cell.addEventListener("mouseleave", clearHighlight);
+                    } else {
+                        cell.classList.add("empty-cell");
+                    }
+                    gridContainer.appendChild(cell);
+                }
+            }
+        
+            // Function to draw a curved line between two cells
+            function drawLine(row1, col1, row2, col2, color = "#000", width = 2) {
+                const x1 = col1 * 120 + 60;
+                const y1 = row1 * 120 + 60;
+                const x2 = col2 * 120 + 60;
+                const y2 = row2 * 120 + 60;
+                const curveFactor = 0.25;
+        
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path.setAttribute("d", `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveFactor * (y2 - y1)} ${(y1 + y2) / 2 + curveFactor * (x2 - x1)}, ${x2} ${y2}`);
+                path.setAttribute("stroke", color);
+                path.setAttribute("stroke-width", width);
+                path.setAttribute("fill", "none");
+                svg.appendChild(path);
+        
+                // Animate path
+                path.animate([{ strokeDashoffset: 1000 }, { strokeDashoffset: 0 }], {
+                    duration: 3000,
+                    iterations: Infinity,
+                    easing: "linear",
+                });
+        
+                return path;
+            }
+        
+            // Randomly draw and animate lines between skill cells
+            function randomLines() {
+                svg.innerHTML = "";
+                for (let i = 0; i < skillPositions.length; i++) {
+                    const { row: row1, col: col1 } = skillPositions[i];
+                    const randomPos = skillPositions[Math.floor(Math.random() * skillPositions.length)];
+                    const { row: row2, col: col2 } = randomPos;
+                    if (row1 !== row2 || col1 !== col2) {
+                        drawLine(row1, col1, row2, col2);
+                    }
+                }
+            }
+        
+            // Highlight lines on hover
+            function highlightLines(event) {
+                const { row, col } = event.target.dataset;
+                svg.innerHTML = "";
+                skillPositions.forEach(pos => {
+                    if (pos.row != row || pos.col != col) {
+                        drawLine(parseInt(row), parseInt(col), pos.row, pos.col, "#FFD700", 3);
+                    }
+                });
+            }
+        
+            // Clear highlight when hover ends
+            function clearHighlight() {
+                svg.innerHTML = "";
+                randomLines();
+            }
+        
+            // Set interval to continuously animate random lines
+            randomLines();
+            setInterval(randomLines, 4000);
+        });
+        
+    </script>
+</body>
+</html>
