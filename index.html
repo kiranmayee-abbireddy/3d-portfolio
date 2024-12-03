@@ -168,58 +168,87 @@
         }
         
         .container-edu {
-            display: flex; /* Flexbox for horizontal layout */
-            flex-direction:row;
-            justify-content: center; /* Center-align the entire content */
-            gap: 20px; /* Space between the cards */
-            flex-wrap: wrap; /* Allow wrapping if the screen size is small */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         .education-item {
-            width: 250px; /* Set a fixed width for each card */
-            padding: 20px;
-            background-color: #f4f4f400; /* Light background color */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
-            text-align: left; /* Align text to the left */
-        }
-        
-        /* Make cards alternate sides */
-        .education-item:nth-child(odd) {
-            align-self: flex-start; /* Align odd-numbered cards to the left */
-        }
-        
-        .education-item:nth-child(even) {
-            align-self: flex-start; /* Align even-numbered cards to the right */
-        }
-        
-        /* Styling for the header and paragraphs */
-        h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
+            flex: 0 1 300px; /* Fixed width for each card */
+            min-width: 250px;
+            max-width: 300px;
+            background-color: transparent;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            text-align: center;
         }
         
         .education-item h3 {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            color: #fff;
         }
         
         .education-item p {
             font-size: 16px;
-            margin: 5px 0;
+            margin: 8px 0;
+            color: rgba(255, 255, 255, 0.8);
         }
-
+        
+        /* Update hover effects */
         .education-item:nth-child(1):hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
             box-shadow: 0 0 15px rgba(73, 8, 106, 0.5), 0 0 30px rgba(255, 0, 217, 0.509), 0 0 45px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
         }
         
         .education-item:nth-child(2):hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
             box-shadow: 0 0 15px rgba(68, 126, 164, 0.728), 0 0 30px rgba(38, 96, 189, 0.578), 0 0 45px rgba(0, 47, 255, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
         }
         
         .education-item:nth-child(3):hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
             box-shadow: 0 0 15px rgba(21, 190, 134, 0.564), 0 0 30px rgba(4, 105, 43, 0.747), 0 0 45px rgba(0, 255, 85, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
         }
+        
+        @media screen and (max-width: 992px) {
+            .container-edu {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            .education-item {
+                flex: 0 1 calc(50% - 20px);
+                min-width: 250px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .container-edu {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .education-item {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
         /* Grid Layout for Skills */
         /* Styling for the grid layout */
         .grid-container {
@@ -734,7 +763,38 @@
                 max-width: 280px;
             }
         }
+
+        /* Update animation styles */
+        section {
+            opacity: 1; /* Start visible */
+            transform: translateY(0); /* Start at normal position */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        section.fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section.fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 </head>
 <body>
     <canvas id="background-canvas"></canvas>
@@ -1200,24 +1260,107 @@
     </script>
     <script>
         // Menu toggle functionality
-        const menuToggle = document.querySelector('.menu-toggle');
-        const body = document.body;
+        const menuToggleBtn = document.querySelector('.menu-toggle');
+        const bodyElement = document.body;
 
-        menuToggle.addEventListener('click', () => {
-            body.classList.toggle('menu-open');
+        menuToggleBtn.addEventListener('click', () => {
+            bodyElement.classList.toggle('menu-open');
+            if (bodyElement.classList.contains('menu-open')) {
+                lenis.stop();
+            } else {
+                lenis.start();
+            }
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('header') && !e.target.closest('.menu-toggle')) {
-                body.classList.remove('menu-open');
+                bodyElement.classList.remove('menu-open');
+                lenis.start();
             }
         });
 
         // Close menu when clicking on a link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
-                body.classList.remove('menu-open');
+                bodyElement.classList.remove('menu-open');
+                lenis.start();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add fade-in class to all sections initially
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('fade-in');
+            });
+
+            // Add fade-up class to elements we want to animate
+            const elementsToAnimate = document.querySelectorAll('.project, .education-item, .game-card, .website-card, .skill');
+            elementsToAnimate.forEach(el => {
+                el.classList.add('fade-up');
+            });
+
+            // Set up the intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add visible class to trigger animation
+                        entry.target.classList.add('visible');
+                        
+                        // Animate children with fade-up class
+                        if (entry.target.tagName === 'SECTION') {
+                            const fadeElements = entry.target.querySelectorAll('.fade-up');
+                            fadeElements.forEach((el, index) => {
+                                setTimeout(() => {
+                                    el.classList.add('visible');
+                                }, 200 + (index * 100)); // Stagger delay
+                            });
+                        }
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Update Lenis scroll initialization
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    lenis.scrollTo(target, {
+                        offset: 0,
+                        duration: 1.2,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                    });
+                }
             });
         });
     </script>
