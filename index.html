@@ -867,6 +867,131 @@
         input, textarea {
             padding-left: 15px;
         }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            width: 2px;
+            height: calc(100% - 40px);
+            background: linear-gradient(to bottom, 
+                rgba(255,255,255,0.1),
+                rgba(255,255,255,0.5),
+                rgba(255,255,255,0.1));
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 50px 0;
+            width: 50%;
+            min-height: 120px;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            padding-right: 50px;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.5);
+            top: 50%;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .timeline-item.left .timeline-dot {
+            right: 37px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item.right .timeline-dot {
+            left: -10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-content {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .timeline-item:hover .timeline-content {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: translateY(-50%) scale(1.5);
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        .timeline-item .project {
+            padding: 20px;
+            margin: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .timeline-item .project:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                margin: 30px 0;
+            }
+
+            .timeline-item.left,
+            .timeline-item.right {
+                left: 0;
+                padding-right: 20px;
+                padding-left: 70px;
+            }
+
+            .timeline-item.left .timeline-dot,
+            .timeline-item.right .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-content {
+                transform: translateX(-20px);
+            }
+
+            .timeline-item:hover .timeline-content {
+                transform: translateX(0);
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 </head>
@@ -977,24 +1102,51 @@
             </div>
         </section>
 
-        <section id="projects" style="margin-top: -130px;">
+        <section id="projects">
             <div class="container">
                 <h2>Projects</h2>
-                <div class="project">
-                    <h3>Automatic Vehicle Braking and Parking System</h3>
-                    <p>Developed a cutting-edge system incorporating advanced sensors and control mechanisms for automatic braking in potential collision scenarios and automated parking.</p>
-                </div>
-                <div class="project">
-                    <h3>IoT-based Real-time River Water Quality Monitoring System</h3>
-                    <p>Implemented a river monitoring system with strategically placed sensors, collecting real-time water quality data (pH, dissolved oxygen, pollutants).</p>
-                </div>
-                <div class="project">
-                    <h3>Real-time Person Alertness and Phone Usage Detection</h3>
-                    <p>Utilized computer vision techniques to analyze live video feeds, assessing alertness levels and detecting phone usage through facial expressions and gestures.</p>
-                </div>
-                <div class="project">
-                    <h3>Battery-powered Smart Agrochemical Sprayer</h3>
-                    <p>Integrated advanced technology for precision, efficiency, and sustainability in agricultural spraying.</p>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="project">
+                                <h3>Automatic Vehicle Braking and Parking System</h3>
+                                <p>Developed a cutting-edge system incorporating advanced sensors and control mechanisms for automatic braking in potential collision scenarios and automated parking.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="project">
+                                <h3>IoT-based River Water Quality Monitoring System</h3>
+                                <p>Implemented a river monitoring system with strategically placed sensors, collecting real-time water quality data (pH, dissolved oxygen, pollutants).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="project">
+                                <h3>Real-time Person Alertness and Phone Usage Detection</h3>
+                                <p>Utilized computer vision techniques to analyze live video feeds, assessing alertness levels and detecting phone usage through facial expressions and gestures.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="project">
+                                <h3>Battery-powered Smart Agrochemical Sprayer</h3>
+                                <p>Integrated advanced technology for precision, efficiency, and sustainability in agricultural spraying.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
