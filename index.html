@@ -13,6 +13,8 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
         header {
             background-color: #000000;
@@ -44,17 +46,21 @@
             text-shadow: 0 0 10px #bb850f, 0 0 20px #bb850f, 0 0 30px #bb850f, 0 0 40px #bb850f;
         }
         section {
-            padding: 60px 20px;
-            margin-bottom: 30px;
+            padding: 40px 20px;
+            margin-bottom: 0;
             position: relative;
             z-index: 1;
         }
         h1, h2 {
             text-align: center;
         }
-        .container {
+        .container, .container-edu {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 15px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
         }
     
 
@@ -301,9 +307,10 @@
 
         .games-grid, .websites-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            width: 100%;
         }
 
         .game-card, .website-card {
@@ -456,7 +463,275 @@
 
             /* Adjust main content to account for header height */
             main {
-                padding-top: 60px;
+                padding-top: 50px;
+            }
+
+            section#about {
+                padding-top: 20px;
+            }
+
+            .container {
+                padding-top: 0;
+            }
+
+            section {
+                padding: 30px 15px;
+                margin-bottom: 20px;
+            }
+
+            /* Fix specific section margins */
+            #skills .container, 
+            #projects, 
+            #education {
+                margin-top: 0 !important; /* Override inline styles */
+            }
+
+            h1 {
+                margin-top: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            main {
+                padding-top: 40px;
+            }
+
+            section {
+                padding: 20px 10px;
+                margin-bottom: 15px;
+            }
+
+            section#about {
+                padding-top: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-top: 5px;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        section {
+            padding: 60px 20px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Update media queries for better responsiveness */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+                margin-bottom: 0.75rem;
+            }
+
+            section {
+                padding: 40px 15px;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .project, .education-item {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .game-card h3, .website-card h3 {
+                font-size: 1.25rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .btn {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+
+            .btn-container {
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+                margin-bottom: 0.75rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            section {
+                padding: 30px 10px;
+                margin-bottom: 15px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .project, .education-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .game-card, .website-card {
+                padding: 1rem;
+            }
+
+            .game-card h3, .website-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+
+            .btn-container {
+                gap: 15px;
+            }
+
+            p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* Fix specific section margins */
+        @media screen and (max-width: 768px) {
+            #skills .container, 
+            #projects, 
+            #education,
+            #games,
+            #websites {
+                margin-top: 0 !important;
+            }
+
+            .games-grid, .websites-grid {
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .container-edu {
+                gap: 15px;
+            }
+        }
+
+        /* Update container styles */
+        .container, .container-edu {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .project, .education-item, .game-card, .website-card {
+            text-align: left; /* Keep content left-aligned within cards */
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Update media queries */
+        @media screen and (max-width: 768px) {
+            .container, .container-edu {
+                padding: 0 15px;
+                width: 100%;
+            }
+
+            .games-grid, .websites-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: 1rem auto;
+            }
+
+            .project, .education-item, .game-card, .website-card {
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .btn-container {
+                gap: 20px;
+                padding: 0 10px;
+            }
+
+            .container-edu {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .education-item {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container, .container-edu {
+                padding: 0 10px;
+            }
+
+            .games-grid, .websites-grid {
+                max-width: 320px;
+            }
+
+            .project, .education-item, .game-card, .website-card {
+                max-width: 320px;
+            }
+
+            .btn-container {
+                gap: 15px;
+            }
+
+            .education-item {
+                max-width: 280px;
             }
         }
     </style>
