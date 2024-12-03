@@ -15,24 +15,30 @@
             overflow-x: hidden;
         }
         header {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #000000;
             position: fixed;
             width: 100%;
             z-index: 1000;
+            padding: 15px 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        nav {
+            margin-right: 50px;
         }
         nav ul {
             list-style-type: none;
             padding: 0;
-            text-align: center;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
+            margin: 0;
+            display: flex;
+            gap: 20px;
         }
         nav ul li a {
             color: #ffffff;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
         nav ul li a:hover {
             text-shadow: 0 0 10px #bb850f, 0 0 20px #bb850f, 0 0 30px #bb850f, 0 0 40px #bb850f;
@@ -212,20 +218,25 @@
         /* Styling for the grid layout */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(5, 120px);
-            grid-template-rows: repeat(5, 120px);
+            grid-template-columns: repeat(5, minmax(60px, 100px));
             gap: 10px;
             position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+            justify-content: center;
         }
         
         .grid-cell {
-            width: 100px;
-            height: 100px;
+            aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             color: #fff;
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 8px;
         }
         
         .skill {
@@ -235,17 +246,23 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
             z-index:5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
         }
 
-        .skill:hover{
+        .skill:hover {
             background: linear-gradient(to top right, #5ffaff, #feb47b, #cba011);
-            color:#000000;
+            color: #000000;
         }
         
         .empty-cell {
             background-color: transparent;
         }
-        
+
         .line-svg {
             position: absolute;
             top: 0;
@@ -253,8 +270,195 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 1;
         }
 
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(5, minmax(50px, 80px));
+                gap: 8px;
+                padding: 10px;
+            }
+            
+            .grid-cell {
+                font-size: 0.8rem;
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: repeat(5, minmax(40px, 60px));
+                gap: 5px;
+                padding: 5px;
+            }
+            
+            .grid-cell {
+                font-size: 0.7rem;
+                padding: 3px;
+            }
+        }
+
+        .games-grid, .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .game-card, .website-card {
+            background-color: rgba(51, 51, 51, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-card:hover, .website-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5),
+                       0 0 30px rgba(255, 0, 0, 0.3),
+                       0 0 45px rgba(255, 165, 0, 0.3);
+        }
+
+        .game-preview, .website-preview {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625 or 56.25%) */
+            margin: 1rem 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .game-frame, .website-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .game-frame:hover, .website-frame:hover {
+            transform: scale(1.02);
+        }
+
+        .game-card h3, .website-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .game-card p, .website-card p {
+            margin: 1rem 0;
+            color: #cccccc;
+        }
+
+        #games, #websites {
+            padding: 60px 20px;
+            margin-bottom: 30px;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            padding: 10px;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger::before {
+            transform: translateY(-10px);
+        }
+
+        .hamburger::after {
+            transform: translateY(10px);
+        }
+
+        .menu-open .hamburger {
+            background-color: transparent;
+        }
+
+        .menu-open .hamburger::before {
+            transform: rotate(45deg);
+        }
+
+        .menu-open .hamburger::after {
+            transform: rotate(-45deg);
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            header nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background-color: #000000;
+                padding-top: 60px;
+                transition: right 0.3s ease;
+                margin-right: 0;
+            }
+
+            .menu-open header nav {
+                right: 0;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            nav ul li a {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            /* Adjust main content to account for header height */
+            main {
+                padding-top: 60px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -265,11 +469,16 @@
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#websites">Websites</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+        </div>
     </header>
 
     <main>
@@ -289,6 +498,72 @@
                 <h2>Skills</h2>
                 <div class="grid-container">
                     <svg class="line-svg"></svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="games">
+            <div class="container">
+                <h2>Games</h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <h3>Parallel Love</h3>
+                        <div class="game-preview">
+                            <iframe src="https://kiranmayee-abbireddy.github.io/Parallel-love/" 
+                                    frameborder="0" 
+                                    class="game-frame"></iframe>
+                        </div>
+                        <p>A challenging platformer game with unique parallel mechanics.</p>
+                        <a href="https://kiranmayee-abbireddy.github.io/Parallel-love/" 
+                           target="_blank" 
+                           class="btn">Play Full Screen</a>
+                    </div>
+
+                    <div class="game-card">
+                        <h3>Bubble Fish</h3>
+                        <div class="game-preview">
+                            <iframe src="https://kiranmayee-abbireddy.github.io/bubble-fish/" 
+                                    frameborder="0" 
+                                    class="game-frame"></iframe>
+                        </div>
+                        <p>An underwater adventure game with colorful fish and bubbles.</p>
+                        <a href="https://kiranmayee-abbireddy.github.io/bubble-fish/" 
+                           target="_blank" 
+                           class="btn">Play Full Screen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="websites">
+            <div class="container">
+                <h2>Websites</h2>
+                <div class="websites-grid">
+                    <div class="website-card">
+                        <h3>Digital Art Gallery</h3>
+                        <div class="website-preview">
+                            <iframe src="https://kiranmayee-abbireddy.github.io/My-digital-art-gallery/" 
+                                    frameborder="0" 
+                                    class="website-frame"></iframe>
+                        </div>
+                        <p>A showcase of digital artwork featuring various themes and styles.</p>
+                        <a href="https://kiranmayee-abbireddy.github.io/My-digital-art-gallery/" 
+                           target="_blank" 
+                           class="btn">Visit Website</a>
+                    </div>
+
+                    <div class="website-card">
+                        <h3>Car Rental Website</h3>
+                        <div class="website-preview">
+                            <iframe src="https://kiranmayee-abbireddy.github.io/rental-website/" 
+                                    frameborder="0" 
+                                    class="website-frame"></iframe>
+                        </div>
+                        <p>A modern car rental platform with booking functionality.</p>
+                        <a href="https://kiranmayee-abbireddy.github.io/rental-website/" 
+                           target="_blank" 
+                           class="btn">Visit Website</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -511,40 +786,104 @@
                 }
             }
         
-            // Function to draw a curved line between two cells
+            // Update the drawLine function
             function drawLine(row1, col1, row2, col2, color = "#000", width = 2) {
-                const x1 = col1 * 120 + 60;
-                const y1 = row1 * 120 + 60;
-                const x2 = col2 * 120 + 60;
-                const y2 = row2 * 120 + 60;
+                const gridContainer = document.querySelector(".grid-container");
+                const cells = gridContainer.getElementsByClassName("grid-cell");
+                const cellRect = cells[0].getBoundingClientRect();
+                const cellSize = cellRect.width;
+                const gap = parseInt(window.getComputedStyle(gridContainer).gap);
+                
+                // Calculate positions based on cell size and position
+                const x1 = col1 * (cellSize + gap) + cellSize/2;
+                const y1 = row1 * (cellSize + gap) + cellSize/2;
+                const x2 = col2 * (cellSize + gap) + cellSize/2;
+                const y2 = row2 * (cellSize + gap) + cellSize/2;
                 const curveFactor = 0.25;
-        
+                
+                // Create glow effect path
+                const glowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                glowPath.setAttribute("d", `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveFactor * (y2 - y1)} ${(y1 + y2) / 2 + curveFactor * (x2 - x1)}, ${x2} ${y2}`);
+                glowPath.setAttribute("stroke", color);
+                glowPath.setAttribute("stroke-width", width + 2);
+                glowPath.setAttribute("fill", "none");
+                glowPath.setAttribute("filter", "url(#glow)");
+                glowPath.style.opacity = "0.5";
+                
+                // Create main path
                 const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                path.setAttribute("d", `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveFactor * (y2 - y1)} ${(y1 + y2) / 2 + curveFactor * (x2 - x1)}, ${x2} ${y2}`);
+                path.setAttribute("d", glowPath.getAttribute("d"));
                 path.setAttribute("stroke", color);
                 path.setAttribute("stroke-width", width);
                 path.setAttribute("fill", "none");
+                
+                // Set up animation
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                path.style.animation = "drawLine 2s ease-out forwards";
+                glowPath.style.strokeDasharray = length;
+                glowPath.style.strokeDashoffset = length;
+                glowPath.style.animation = "drawLine 2s ease-out forwards";
+                
+                svg.appendChild(glowPath);
                 svg.appendChild(path);
-        
-                // Animate path
-                path.animate([{ strokeDashoffset: 1000 }, { strokeDashoffset: 0 }], {
-                    duration: 3000,
-                    iterations: Infinity,
-                    easing: "linear",
-                });
-        
-                return path;
             }
         
+            // Update SVG size on window resize
+            function updateSVGSize() {
+                const gridContainer = document.querySelector(".grid-container");
+                const containerRect = gridContainer.getBoundingClientRect();
+                const svg = document.querySelector(".line-svg");
+                svg.setAttribute("width", containerRect.width);
+                svg.setAttribute("height", containerRect.height);
+            }
+
+            // Add resize observer
+            const resizeObserver = new ResizeObserver(() => {
+                updateSVGSize();
+                randomLines();
+            });
+            resizeObserver.observe(document.querySelector(".grid-container"));
+
+            // Initial setup
+            updateSVGSize();
+
+            // Add SVG filters for glow effect
+            const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+            const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+            filter.setAttribute("id", "glow");
+            filter.innerHTML = `
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            `;
+            defs.appendChild(filter);
+            svg.appendChild(defs);
+
             // Randomly draw and animate lines between skill cells
             function randomLines() {
                 svg.innerHTML = "";
-                for (let i = 0; i < skillPositions.length; i++) {
-                    const { row: row1, col: col1 } = skillPositions[i];
-                    const randomPos = skillPositions[Math.floor(Math.random() * skillPositions.length)];
-                    const { row: row2, col: col2 } = randomPos;
-                    if (row1 !== row2 || col1 !== col2) {
-                        drawLine(row1, col1, row2, col2);
+                const skillCells = Array.from(document.getElementsByClassName('skill'));
+                
+                // Create a subset of random connections
+                const numConnections = Math.min(10, skillCells.length); // Limit number of lines
+                
+                for (let i = 0; i < numConnections; i++) {
+                    const cell1 = skillCells[Math.floor(Math.random() * skillCells.length)];
+                    const cell2 = skillCells[Math.floor(Math.random() * skillCells.length)];
+                    
+                    if (cell1 !== cell2) {
+                        drawLine(
+                            parseInt(cell1.dataset.row),
+                            parseInt(cell1.dataset.col),
+                            parseInt(cell2.dataset.row),
+                            parseInt(cell2.dataset.col),
+                            "#000",
+                            1.5
+                        );
                     }
                 }
             }
@@ -553,9 +892,21 @@
             function highlightLines(event) {
                 const { row, col } = event.target.dataset;
                 svg.innerHTML = "";
-                skillPositions.forEach(pos => {
-                    if (pos.row != row || pos.col != col) {
-                        drawLine(parseInt(row), parseInt(col), pos.row, pos.col, "#FFD700", 3);
+                
+                // Get all skill cells
+                const skillCells = Array.from(document.getElementsByClassName('skill'));
+                
+                // Draw lines from hovered skill to all other skills
+                skillCells.forEach(targetCell => {
+                    if (targetCell.dataset.row !== row || targetCell.dataset.col !== col) {
+                        drawLine(
+                            parseInt(row), 
+                            parseInt(col), 
+                            parseInt(targetCell.dataset.row), 
+                            parseInt(targetCell.dataset.col), 
+                            "#FFD700", 
+                            2
+                        );
                     }
                 });
             }
@@ -571,6 +922,29 @@
             setInterval(randomLines, 4000);
         });
         
+    </script>
+    <script>
+        // Menu toggle functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            body.classList.toggle('menu-open');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header') && !e.target.closest('.menu-toggle')) {
+                body.classList.remove('menu-open');
+            }
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                body.classList.remove('menu-open');
+            });
+        });
     </script>
 </body>
 </html>
