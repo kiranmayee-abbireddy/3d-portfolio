@@ -140,18 +140,82 @@
         form {
             display: grid;
             gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
         }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .form-group label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-align: left;
+            margin-left: 4px;
+        }
+
         input, textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            background-color: rgba(51, 51, 51, 0.7);
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
             color: #ffffff;
+            font-size: 1rem;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            text-align: left;
         }
+
         input:focus, textarea:focus {
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 0, 0, 0.3), 0 0 45px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 255, 0, 0.3);
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        form .btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+
+            input, textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            form .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
         }
         #background-canvas {
             position: fixed;
@@ -793,6 +857,16 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Add placeholder styling */
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Optional: Add some padding to the text inside inputs */
+        input, textarea {
+            padding-left: 15px;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 </head>
@@ -951,22 +1025,24 @@
         </section>
 
         <section id="contact">
-            <div class="container" style="margin-top: -130px;">
+            <div class="container">
                 <h2>Contact Me</h2>
-                <form>
-                    <div>
+                <form id="contactForm" onsubmit="sendEmail(event)">
+                    <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="btn">Send Message</button>
+                    <div class="submit-container">
+                        <button type="submit" class="btn">Send Message</button>
+                    </div>
                 </form>
             </div>
         </section>
@@ -1075,7 +1151,7 @@
             const skills = ["Python", "Java", "C++", "HTML", "SQL", "Data Structures", "Algorithms", "OOP", "Web Development", "Database Management"];
             const gridSize = 5;
             const totalCells = gridSize * gridSize;
-            const grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
+            const grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null);
             const skillPositions = [];
         
             // Helper function to check if a cell has adjacent filled cells
@@ -1363,6 +1439,22 @@
                 }
             });
         });
+    </script>
+    <script>
+        function sendEmail(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const mailtoLink = `mailto:kiranmayee118@gmail.com?subject=Portfolio Contact from ${name}&body=From: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            window.location.href = mailtoLink;
+            
+            // Optional: Clear the form after sending
+            document.getElementById('contactForm').reset();
+        }
     </script>
 </body>
 </html>
