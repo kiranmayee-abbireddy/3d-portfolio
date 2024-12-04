@@ -292,8 +292,6 @@
         }
         
         .container-edu {
-            width: 100%;
-            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -304,9 +302,9 @@
         }
         
         .education-item {
-            flex: 1 1 calc(33.333% - 20px);
+            flex: 1 1 300px;
             min-width: 250px;
-            max-width: 350px;
+            max-width: none;
             background-color: transparent;
             padding: 25px;
             border-radius: 10px;
@@ -314,18 +312,26 @@
             backdrop-filter: blur(5px);
             transition: all 0.3s ease;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         .education-item h3 {
             font-size: 24px;
             margin-bottom: 15px;
             color: #fff;
+            text-align: center;
+            width: 100%;
         }
         
         .education-item p {
             font-size: 16px;
             margin: 8px 0;
             color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            width: 100%;
         }
         
         /* Update hover effects */
@@ -365,9 +371,8 @@
             }
             
             .education-item {
-                flex: 1 1 100%;
                 width: 100%;
-                max-width: 350px;
+                max-width: none;
                 min-width: unset;
             }
         }
@@ -425,7 +430,7 @@
             background-color: rgba(0, 0, 0, 0.8);
             color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             z-index: 2;
             width: 100%;
@@ -440,6 +445,7 @@
             background: linear-gradient(to top right, #5ffaff, #feb47b, #cba011);
             color: #000000;
             transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .skill:hover ~ .galaxy-background {
@@ -968,9 +974,9 @@
             width: 2px;
             height: calc(100% - 40px);
             background: linear-gradient(to bottom, 
-                rgba(255, 215, 0, 0.1),
-                rgba(255, 215, 0, 0.5),
-                rgba(255, 215, 0, 0.1));
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.5),
+                rgba(255, 255, 255, 0.1));
             left: 50%;
             transform: translateX(-50%);
             top: 20px;
@@ -995,35 +1001,28 @@
 
         .timeline-dot {
             position: absolute;
-            width: 2px;
-            height: 40px;
-            background: linear-gradient(to bottom, 
-                rgba(255, 215, 0, 0),
-                rgba(255, 215, 0, 0.4),
-                rgba(255, 215, 0, 0));
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
             top: 50%;
             transform: translateY(-50%);
             transition: all 0.3s ease;
             z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         .timeline-item.left .timeline-dot {
-            right: -1px;
-            transform: translateY(-50%);
+            right: 40px;
         }
 
         .timeline-item.right .timeline-dot {
-            left: -1px;
-            transform: translateY(-50%);
+            left: -6px;
         }
 
         .timeline-item:hover .timeline-dot {
-            height: 60px;
-            background: linear-gradient(to bottom, 
-                rgba(255, 215, 0, 0),
-                rgba(255, 215, 0, 0.8),
-                rgba(255, 215, 0, 0));
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transform: translateY(-50%) scale(1.5);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
 
         .timeline-content {
@@ -1075,7 +1074,7 @@
 
             .timeline-item.left .timeline-dot,
             .timeline-item.right .timeline-dot {
-                left: 29px;
+                left: 26px;
             }
 
             .timeline-content {
@@ -1498,52 +1497,41 @@
 
                 // Create warm background glow
                 const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
-                bgGradient.addColorStop(0, 'rgba(255, 215, 0, 0.8)'); // Gold center
-                bgGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.6)'); // Dark orange middle
-                bgGradient.addColorStop(1, 'rgba(255, 165, 0, 0.4)'); // Orange outer
+                bgGradient.addColorStop(0, 'rgba(255, 215, 0, 0.4)'); // Gold center
+                bgGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.3)'); // Dark orange middle
+                bgGradient.addColorStop(1, 'rgba(255, 165, 0, 0.2)'); // Orange outer
                 ctx.fillStyle = bgGradient;
                 ctx.fillRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
 
                 ctx.globalCompositeOperation = 'source-over';
 
-                // Create multiple spiral arms with warm colors
+                // Create spiral arms with lines instead of particles
                 for (let arm = 0; arm < 3; arm++) {
                     const armOffset = (Math.PI * 2 / 3) * arm;
                     
-                    for (let i = 0; i < 200; i++) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(255, 215, 0, 0.1)`; // Low opacity gold color
+                    ctx.lineWidth = 1;
+
+                    for (let i = 0; i < 200; i += 2) {
                         const angle = 0.15 * i + time + armOffset;
                         const radius = Math.min(2 * i + 15 * Math.sin(time + i * 0.03), maxRadius * 0.8);
                         const x = centerX + radius * Math.cos(angle);
                         const y = centerY + radius * Math.sin(angle);
                         
-                        if (Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) <= maxRadius) {
-                            const particleSize = 2 * (1 - i/300);
-                            const gradient = ctx.createRadialGradient(x, y, 0, x, y, particleSize * 3);
-                            
-                            // Use warm colors for particles
-                            const colors = [
-                                'rgba(255, 215, 0, 0.8)', // Gold
-                                'rgba(255, 140, 0, 0.8)', // Dark orange
-                                'rgba(255, 165, 0, 0.8)'  // Orange
-                            ];
-                            const color = colors[arm];
-                            
-                            gradient.addColorStop(0, color);
-                            gradient.addColorStop(0.4, color.replace('0.8', '0.4'));
-                            gradient.addColorStop(1, 'transparent');
-                            
-                            ctx.beginPath();
-                            ctx.fillStyle = gradient;
-                            ctx.arc(x, y, particleSize * 3, 0, Math.PI * 2);
-                            ctx.fill();
+                        if (i === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
                         }
                     }
+                    ctx.stroke();
                 }
 
                 // Add central glow
-                const centerGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius * 0.5);
-                centerGlow.addColorStop(0, 'rgba(255, 215, 0, 0.4)'); // Gold
-                centerGlow.addColorStop(0.3, 'rgba(255, 140, 0, 0.2)'); // Dark orange
+                const centerGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius * 0.3);
+                centerGlow.addColorStop(0, 'rgba(255, 215, 0, 0.2)'); // Gold
+                centerGlow.addColorStop(0.5, 'rgba(255, 140, 0, 0.1)'); // Dark orange
                 centerGlow.addColorStop(1, 'transparent');
                 ctx.fillStyle = centerGlow;
                 ctx.fillRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
