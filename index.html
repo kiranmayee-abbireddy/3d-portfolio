@@ -15,7 +15,73 @@
             overflow-x: hidden;
             width: 100%;
             position: relative;
+            box-sizing: border-box;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container, .container-edu {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+            overflow: hidden;
+        }
+
+        section {
+            width: 100%;
+            padding: 30px 15px;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container, .container-edu {
+                padding: 0 10px;
+            }
+
+            section {
+                padding: 20px 10px;
+            }
+
+            .grid-container {
+                padding: 5px;
+                margin: 0 auto;
+            }
+
+            .games-grid, .websites-grid {
+                padding: 0 5px;
+            }
+
+            .game-card, .website-card {
+                margin: 10px 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container, .container-edu {
+                padding: 0 8px;
+            }
+
+            section {
+                padding: 15px 8px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+                padding: 0 10px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                padding: 0 10px;
+            }
+        }
+
         header {
             background-color: #000000;
             position: fixed;
@@ -44,12 +110,6 @@
         }
         nav ul li a:hover {
             text-shadow: 0 0 10px #bb850f, 0 0 20px #bb850f, 0 0 30px #bb850f, 0 0 40px #bb850f;
-        }
-        section {
-            padding: 40px 20px;
-            margin-bottom: 0;
-            position: relative;
-            z-index: 1;
         }
         h1, h2 {
             text-align: center;
@@ -232,19 +292,21 @@
         }
         
         .container-edu {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
             display: flex;
             flex-direction: row;
             justify-content: center;
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            flex-wrap: wrap;
         }
         
         .education-item {
-            flex: 0 1 300px; /* Fixed width for each card */
+            flex: 1 1 calc(33.333% - 20px);
             min-width: 250px;
-            max-width: 300px;
+            max-width: 350px;
             background-color: transparent;
             padding: 25px;
             border-radius: 10px;
@@ -288,15 +350,10 @@
             box-shadow: 0 0 15px rgba(21, 190, 134, 0.564), 0 0 30px rgba(4, 105, 43, 0.747), 0 0 45px rgba(0, 255, 85, 0.3), 0 0 60px rgba(255, 255, 0, 0.3), 0 0 75px rgba(42, 61, 206, 0.3);
         }
         
-        @media screen and (max-width: 992px) {
-            .container-edu {
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-            
+        @media screen and (max-width: 1000px) {
             .education-item {
-                flex: 0 1 calc(50% - 20px);
-                min-width: 250px;
+                flex: 1 1 calc(50% - 20px);
+                min-width: 280px;
             }
         }
         
@@ -308,8 +365,17 @@
             }
             
             .education-item {
+                flex: 1 1 100%;
                 width: 100%;
-                max-width: 300px;
+                max-width: 350px;
+                min-width: unset;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .education-item {
+                max-width: 100%;
+                margin: 0 10px;
             }
         }
         
@@ -324,6 +390,7 @@
             margin: 0 auto;
             padding: 15px;
             justify-content: center;
+            overflow: hidden;
         }
         
         .grid-cell {
@@ -338,13 +405,29 @@
             padding: 8px;
         }
         
+        .galaxy-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%; /* Slightly larger than container to ensure full coverage */
+            height: 120%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+        }
+
         .skill {
-            background-color: #000000;
-            color:#ffffff;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-            z-index:5;
+            transition: all 0.3s ease;
+            z-index: 2;
             width: 100%;
             height: 100%;
             display: flex;
@@ -356,8 +439,13 @@
         .skill:hover {
             background: linear-gradient(to top right, #5ffaff, #feb47b, #cba011);
             color: #000000;
+            transform: translateY(-5px);
         }
-        
+
+        .skill:hover ~ .galaxy-background {
+            opacity: 1;
+        }
+
         .empty-cell {
             background-color: transparent;
         }
@@ -456,8 +544,8 @@
         }
 
         #games, #websites {
-            padding: 60px 20px;
-            margin-bottom: 30px;
+            padding: 20px;
+            padding-bottom: 30px;
         }
 
         @keyframes drawLine {
@@ -469,7 +557,7 @@
         .menu-toggle {
             display: none;
             position: absolute;
-            right: 20px;
+            right: 2px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 1001;
@@ -568,7 +656,7 @@
             }
 
             section {
-                padding: 30px 15px;
+                padding: 20px 10px;
                 margin-bottom: 20px;
             }
 
@@ -590,7 +678,7 @@
             }
 
             section {
-                padding: 20px 10px;
+                padding: 15px 8px;
                 margin-bottom: 15px;
             }
 
@@ -620,14 +708,14 @@
         }
 
         section {
-            padding: 60px 20px;
+            padding: 30px 15px;
             margin-bottom: 30px;
         }
 
         .container {
-            max-width: 800px;
+            
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
 
         /* Update media queries for better responsiveness */
@@ -648,7 +736,7 @@
             }
 
             section {
-                padding: 40px 15px;
+                padding: 20px 10px;
                 margin-bottom: 20px;
             }
 
@@ -693,7 +781,7 @@
             }
 
             section {
-                padding: 30px 10px;
+                padding: 15px 8px;
                 margin-bottom: 15px;
             }
 
@@ -754,7 +842,7 @@
         .container, .container-edu {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
             text-align: center;
         }
 
@@ -880,9 +968,9 @@
             width: 2px;
             height: calc(100% - 40px);
             background: linear-gradient(to bottom, 
-                rgba(255,255,255,0.1),
-                rgba(255,255,255,0.5),
-                rgba(255,255,255,0.1));
+                rgba(255, 215, 0, 0.1),
+                rgba(255, 215, 0, 0.5),
+                rgba(255, 215, 0, 0.1));
             left: 50%;
             transform: translateX(-50%);
             top: 20px;
@@ -896,7 +984,7 @@
         }
 
         .timeline-item.left {
-            left: 0;
+            left: 47px;
             padding-right: 50px;
         }
 
@@ -907,24 +995,35 @@
 
         .timeline-dot {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.5);
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, 
+                rgba(255, 215, 0, 0),
+                rgba(255, 215, 0, 0.4),
+                rgba(255, 215, 0, 0));
             top: 50%;
+            transform: translateY(-50%);
             transition: all 0.3s ease;
             z-index: 2;
         }
 
         .timeline-item.left .timeline-dot {
-            right: 37px;
+            right: -1px;
             transform: translateY(-50%);
         }
 
         .timeline-item.right .timeline-dot {
-            left: -10px;
+            left: -1px;
             transform: translateY(-50%);
+        }
+
+        .timeline-item:hover .timeline-dot {
+            height: 60px;
+            background: linear-gradient(to bottom, 
+                rgba(255, 215, 0, 0),
+                rgba(255, 215, 0, 0.8),
+                rgba(255, 215, 0, 0));
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         .timeline-content {
@@ -942,11 +1041,6 @@
             opacity: 1;
             transform: translateX(0);
             pointer-events: auto;
-        }
-
-        .timeline-item:hover .timeline-dot {
-            transform: translateY(-50%) scale(1.5);
-            box-shadow: 0 0 15px rgba(255,255,255,0.5);
         }
 
         .timeline-item .project {
@@ -981,7 +1075,7 @@
 
             .timeline-item.left .timeline-dot,
             .timeline-item.right .timeline-dot {
-                left: 20px;
+                left: 29px;
             }
 
             .timeline-content {
@@ -990,6 +1084,41 @@
 
             .timeline-item:hover .timeline-content {
                 transform: translateX(0);
+            }
+        }
+
+        #skills {
+            position: relative;
+            z-index: 1;
+            padding-top: 20px;
+        }
+
+        #skills .container {
+            margin-top: 0;
+        }
+
+        #skills h2 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .grid-container {
+            position: relative;
+            z-index: 3;
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            #skills {
+                padding-top: 15px;
+            }
+
+            #skills h2 {
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -1028,7 +1157,7 @@
         </section>
 
         <section id="skills">
-            <div class="container" style="margin-top:-100px;">
+            <div class="container">
                 <h2>Skills</h2>
                 <div class="grid-container">
                     <svg class="line-svg"></svg>
@@ -1151,7 +1280,7 @@
             </div>
         </section>
 
-        <section id="education" style="margin-top: -130px;">
+        <section id="education">
             <h2>Education</h2>
             <div class="container-edu" >
                 <div class="education-item">
@@ -1299,38 +1428,131 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const gridContainer = document.querySelector(".grid-container");
-            const svg = document.querySelector(".line-svg");
             const skills = ["Python", "Java", "C++", "HTML", "SQL", "Data Structures", "Algorithms", "OOP", "Web Development", "Database Management"];
             const gridSize = 5;
-            const totalCells = gridSize * gridSize;
-            const grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null);
-            const skillPositions = [];
-        
+            const grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(null));
+
             // Helper function to check if a cell has adjacent filled cells
-            function hasAdjacentFilledCells(row, col) {
-                const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+            function hasAdjacentCell(row, col) {
+                // Only check horizontal and vertical adjacency, allow diagonal
+                const directions = [
+                    [-1, 0], // up
+                    [1, 0],  // down
+                    [0, -1], // left
+                    [0, 1]   // right
+                ];
+                
                 return directions.some(([dx, dy]) => {
                     const newRow = row + dx;
                     const newCol = col + dy;
-                    return newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize && grid[newRow][newCol] !== null;
+                    return (
+                        newRow >= 0 && newRow < gridSize &&
+                        newCol >= 0 && newCol < gridSize &&
+                        grid[newRow][newCol] !== null
+                    );
                 });
             }
-        
-            // Place each skill in a cell, ensuring no adjacent cells are filled
+
+            // Place skills with spacing
             skills.forEach(skill => {
                 let placed = false;
-                while (!placed) {
+                let attempts = 0;
+                while (!placed && attempts < 100) {
                     const row = Math.floor(Math.random() * gridSize);
                     const col = Math.floor(Math.random() * gridSize);
-                    if (!grid[row][col] && !hasAdjacentFilledCells(row, col)) {
+                    if (!grid[row][col] && !hasAdjacentCell(row, col)) {
                         grid[row][col] = skill;
-                        skillPositions.push({ skill, row, col });
                         placed = true;
                     }
+                    attempts++;
                 }
             });
-        
-            // Render the grid with skills and empty cells
+
+            // Create galaxy canvas with wormhole effect
+            const galaxyCanvas = document.createElement('canvas');
+            galaxyCanvas.classList.add('galaxy-background');
+            const ctx = galaxyCanvas.getContext('2d');
+
+            function resizeGalaxy() {
+                galaxyCanvas.width = gridContainer.offsetWidth;
+                galaxyCanvas.height = gridContainer.offsetHeight;
+            }
+
+            let time = 0;
+            function createGalaxy() {
+                ctx.clearRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
+                
+                const centerX = galaxyCanvas.width / 2;
+                const centerY = galaxyCanvas.height / 2;
+                const maxRadius = Math.min(galaxyCanvas.width, galaxyCanvas.height) * 0.5;
+
+                // Create circular mask
+                const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
+                gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+                gradient.addColorStop(0.6, 'rgba(0, 0, 0, 0.8)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
+                ctx.globalCompositeOperation = 'source-in';
+
+                // Create warm background glow
+                const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
+                bgGradient.addColorStop(0, 'rgba(255, 215, 0, 0.8)'); // Gold center
+                bgGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.6)'); // Dark orange middle
+                bgGradient.addColorStop(1, 'rgba(255, 165, 0, 0.4)'); // Orange outer
+                ctx.fillStyle = bgGradient;
+                ctx.fillRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
+
+                ctx.globalCompositeOperation = 'source-over';
+
+                // Create multiple spiral arms with warm colors
+                for (let arm = 0; arm < 3; arm++) {
+                    const armOffset = (Math.PI * 2 / 3) * arm;
+                    
+                    for (let i = 0; i < 200; i++) {
+                        const angle = 0.15 * i + time + armOffset;
+                        const radius = Math.min(2 * i + 15 * Math.sin(time + i * 0.03), maxRadius * 0.8);
+                        const x = centerX + radius * Math.cos(angle);
+                        const y = centerY + radius * Math.sin(angle);
+                        
+                        if (Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) <= maxRadius) {
+                            const particleSize = 2 * (1 - i/300);
+                            const gradient = ctx.createRadialGradient(x, y, 0, x, y, particleSize * 3);
+                            
+                            // Use warm colors for particles
+                            const colors = [
+                                'rgba(255, 215, 0, 0.8)', // Gold
+                                'rgba(255, 140, 0, 0.8)', // Dark orange
+                                'rgba(255, 165, 0, 0.8)'  // Orange
+                            ];
+                            const color = colors[arm];
+                            
+                            gradient.addColorStop(0, color);
+                            gradient.addColorStop(0.4, color.replace('0.8', '0.4'));
+                            gradient.addColorStop(1, 'transparent');
+                            
+                            ctx.beginPath();
+                            ctx.fillStyle = gradient;
+                            ctx.arc(x, y, particleSize * 3, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                }
+
+                // Add central glow
+                const centerGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius * 0.5);
+                centerGlow.addColorStop(0, 'rgba(255, 215, 0, 0.4)'); // Gold
+                centerGlow.addColorStop(0.3, 'rgba(255, 140, 0, 0.2)'); // Dark orange
+                centerGlow.addColorStop(1, 'transparent');
+                ctx.fillStyle = centerGlow;
+                ctx.fillRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
+
+                time += 0.005;
+                requestAnimationFrame(createGalaxy);
+            }
+
+            // Create grid cells
             for (let row = 0; row < gridSize; row++) {
                 for (let col = 0; col < gridSize; col++) {
                     const cell = document.createElement("div");
@@ -1338,153 +1560,22 @@
                     if (grid[row][col]) {
                         cell.classList.add("skill");
                         cell.innerText = grid[row][col];
-                        cell.dataset.row = row;
-                        cell.dataset.col = col;
-                        cell.addEventListener("mouseenter", highlightLines);
-                        cell.addEventListener("mouseleave", clearHighlight);
                     } else {
                         cell.classList.add("empty-cell");
                     }
                     gridContainer.appendChild(cell);
                 }
             }
-        
-            // Update the drawLine function
-            function drawLine(row1, col1, row2, col2, color = "#000", width = 2) {
-                const gridContainer = document.querySelector(".grid-container");
-                const cells = gridContainer.getElementsByClassName("grid-cell");
-                const cellRect = cells[0].getBoundingClientRect();
-                const cellSize = cellRect.width;
-                const gap = parseInt(window.getComputedStyle(gridContainer).gap);
-                
-                // Calculate positions based on cell size and position
-                const x1 = col1 * (cellSize + gap) + cellSize/2;
-                const y1 = row1 * (cellSize + gap) + cellSize/2;
-                const x2 = col2 * (cellSize + gap) + cellSize/2;
-                const y2 = row2 * (cellSize + gap) + cellSize/2;
-                const curveFactor = 0.25;
-                
-                // Create glow effect path
-                const glowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                glowPath.setAttribute("d", `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveFactor * (y2 - y1)} ${(y1 + y2) / 2 + curveFactor * (x2 - x1)}, ${x2} ${y2}`);
-                glowPath.setAttribute("stroke", color);
-                glowPath.setAttribute("stroke-width", width + 2);
-                glowPath.setAttribute("fill", "none");
-                glowPath.setAttribute("filter", "url(#glow)");
-                glowPath.style.opacity = "0.5";
-                
-                // Create main path
-                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                path.setAttribute("d", glowPath.getAttribute("d"));
-                path.setAttribute("stroke", color);
-                path.setAttribute("stroke-width", width);
-                path.setAttribute("fill", "none");
-                
-                // Set up animation
-                const length = path.getTotalLength();
-                path.style.strokeDasharray = length;
-                path.style.strokeDashoffset = length;
-                path.style.animation = "drawLine 2s ease-out forwards";
-                glowPath.style.strokeDasharray = length;
-                glowPath.style.strokeDashoffset = length;
-                glowPath.style.animation = "drawLine 2s ease-out forwards";
-                
-                svg.appendChild(glowPath);
-                svg.appendChild(path);
-            }
-        
-            // Update SVG size on window resize
-            function updateSVGSize() {
-                const gridContainer = document.querySelector(".grid-container");
-                const containerRect = gridContainer.getBoundingClientRect();
-                const svg = document.querySelector(".line-svg");
-                svg.setAttribute("width", containerRect.width);
-                svg.setAttribute("height", containerRect.height);
-            }
 
-            // Add resize observer
-            const resizeObserver = new ResizeObserver(() => {
-                updateSVGSize();
-                randomLines();
+            // Add and initialize galaxy
+            gridContainer.appendChild(galaxyCanvas);
+            resizeGalaxy();
+            createGalaxy();
+
+            window.addEventListener('resize', () => {
+                resizeGalaxy();
             });
-            resizeObserver.observe(document.querySelector(".grid-container"));
-
-            // Initial setup
-            updateSVGSize();
-
-            // Add SVG filters for glow effect
-            const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-            const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
-            filter.setAttribute("id", "glow");
-            filter.innerHTML = `
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-            `;
-            defs.appendChild(filter);
-            svg.appendChild(defs);
-
-            // Randomly draw and animate lines between skill cells
-            function randomLines() {
-                svg.innerHTML = "";
-                const skillCells = Array.from(document.getElementsByClassName('skill'));
-                
-                // Create a subset of random connections
-                const numConnections = Math.min(10, skillCells.length); // Limit number of lines
-                
-                for (let i = 0; i < numConnections; i++) {
-                    const cell1 = skillCells[Math.floor(Math.random() * skillCells.length)];
-                    const cell2 = skillCells[Math.floor(Math.random() * skillCells.length)];
-                    
-                    if (cell1 !== cell2) {
-                        drawLine(
-                            parseInt(cell1.dataset.row),
-                            parseInt(cell1.dataset.col),
-                            parseInt(cell2.dataset.row),
-                            parseInt(cell2.dataset.col),
-                            "#000",
-                            1.5
-                        );
-                    }
-                }
-            }
-        
-            // Highlight lines on hover
-            function highlightLines(event) {
-                const { row, col } = event.target.dataset;
-                svg.innerHTML = "";
-                
-                // Get all skill cells
-                const skillCells = Array.from(document.getElementsByClassName('skill'));
-                
-                // Draw lines from hovered skill to all other skills
-                skillCells.forEach(targetCell => {
-                    if (targetCell.dataset.row !== row || targetCell.dataset.col !== col) {
-                        drawLine(
-                            parseInt(row), 
-                            parseInt(col), 
-                            parseInt(targetCell.dataset.row), 
-                            parseInt(targetCell.dataset.col), 
-                            "#FFD700", 
-                            2
-                        );
-                    }
-                });
-            }
-        
-            // Clear highlight when hover ends
-            function clearHighlight() {
-                svg.innerHTML = "";
-                randomLines();
-            }
-        
-            // Set interval to continuously animate random lines
-            randomLines();
-            setInterval(randomLines, 4000);
         });
-        
     </script>
     <script>
         // Menu toggle functionality
